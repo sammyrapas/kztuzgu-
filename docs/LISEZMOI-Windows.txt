@@ -1,0 +1,83 @@
+SABLE : installateur pour NumWorks n0110, n0115 et n0120 (PC Windows)
+=========================================================
+
+Rien à installer : ni Python, ni pilote. Windows reconnaît la calculatrice
+tout seul.
+
+1. Décompresse le zip (clic droit > Extraire tout). Ne lance pas
+   l'installateur depuis l'intérieur du zip.
+
+2. Double-clic sur « Installer SABLE.exe ».
+   Si Windows affiche « Windows a protégé votre ordinateur » :
+   Informations complémentaires > Exécuter quand même.
+   Une fenêtre noire s'ouvre, puis la page de l'installateur dans ton
+   navigateur. Laisse la fenêtre noire ouverte ; ferme-la à la fin pour
+   quitter.
+
+3. Branche la calculatrice en USB et appuie sur Reset au dos :
+   elle redémarre sur le système officiel (slot A).
+
+4. Quand le voyant passe au vert, clique sur « Installer SABLE ».
+   Ne débranche pas la calculatrice pendant l'installation.
+
+Les jeux déjà dans le dossier games sont prêts à installer. Pour ajouter
+d'autres jeux .nwa depuis Windows, installe aussi la chaîne ARM
+(Arm GNU Toolchain, « arm-none-eabi », sur developer.arm.com), ou ajoute-les
+dans le dossier games/ de ta copie privée sur GitHub et relance la
+compilation.
+
+Si la page dit que la calculatrice est introuvable alors qu'elle est
+branchée : ferme les autres programmes qui l'utilisent (site de NumWorks,
+NumSocial, un autre installateur), essaie un autre câble ou un autre port USB,
+puis rappuie sur Reset.
+
+SABLE s'installe dans le slot B : le système officiel (slot A) n'est
+jamais modifié. Après un Reset, la calculatrice revient sur le système
+officiel ; il suffit de relancer l'installation pour retrouver SABLE.
+
+Les commandes de SABLE
+----------------------
+
+Flèches ................ choisir une statue ; au bord, la page change
+                         (les statues s'envolent, les nouvelles se forment)
+1 à 9 .................. aller directement à la page 1, 2, 3...
+OK ..................... ouvrir l'appli : sa statue part en poussière
+Effacer ................ BOUTON PANIQUE : tout s'effondre, Calculs s'ouvre
+Var .................... MODE DIEU : verse ce que tu veux (OK maintenu)
+Boîte à outils ......... le Labo (voir plus bas)
+Retour ................. revenir à la première page
++ / - .................. la luminosité (la lune)
+
+Les catastrophes (les touches de fonctions)
+-------------------------------------------
+
+sin pluie · cos tempête de sable · tan tsunami · x^2 foudre · ln volcan
+log virus (le feu le soigne) · e^x explosion · π pluie de décimales en or
+√ une racine géante pousse · ^ météorite · ×10^x pluie d'or
+i monde imaginaire · x,n,t séisme · Ans claquement de doigts (la moitié
+de la matière disparaît) · ( et ) tourner la calculatrice (la gravité
+change) · 0 vider le désert
+
+Quand tu reviens d'une appli
+----------------------------
+
+Le dernier écran de l'appli (ou du jeu) s'effrite en grains de sable qui
+tombent dans le désert. Et tes résultats de Calculs tombent du ciel, faits
+d'une matière qui dépend du nombre : 42 en or, 666 en lave, 0 ouvre un
+trou noir, 404 s'évapore, un nombre premier est en pierre, un nombre à
+virgule coule comme de l'eau, un négatif gèle, un nombre énorme est une
+météorite...
+
+Le Labo (Boîte à outils)
+------------------------
+
+Sablier du cours ....... le temps avant la sonnerie, dans un vrai sablier
+                         (il continue pendant que tu travailles)
+Calculatrice menteuse .. FARCE : prête-la à ton voisin. Elle a l'air normale.
+                         Elle ment de plus en plus. Retour 3 fois : la blague
+Faux appel ............. Mamie, le Directeur, Pythagore, ta calculatrice...
+                         t'appellent. Sur ta calculatrice.
+Désintégrateur ......... écris un mot (LUNDI, LES MATHS...) : poussière.
+Bataille de sable ...... 2 joueurs, des châteaux, des catapultes, de la lave
+Les catastrophes ....... la liste des touches
+Réglages ............... LED, remettre le désert à neuf, statistiques

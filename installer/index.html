@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SABLE Installer</title>
+<style>
+  /* SABLE: a night desert, everything made of sand */
+  :root {
+    --bg: #0a0820;
+    --card: rgba(26, 16, 48, .92);
+    --ink: #e6be6e;
+    --text: #f4e8d0;
+    --muted: #a89cc0;
+    --line: #3a2a58;
+    --accent: #e6be6e;
+    --accent-ink: #1a1030;
+    --accent-soft: rgba(230, 190, 110, .14);
+    --ok: #5cd67a;
+    --warn: #ffb238;
+    --err: #ff5a4a;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body {
+    font-family: "Segoe UI Variable", "Segoe UI", -apple-system, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+    color: var(--text);
+    background:
+      radial-gradient(1px 1px at 12% 18%, #fff 50%, transparent 51%),
+      radial-gradient(1px 1px at 72% 9%, #dcdcff 50%, transparent 51%),
+      radial-gradient(1.5px 1.5px at 40% 30%, #fff 50%, transparent 51%),
+      radial-gradient(1px 1px at 88% 36%, #fff 50%, transparent 51%),
+      radial-gradient(1px 1px at 25% 52%, #b8b8ff 50%, transparent 51%),
+      radial-gradient(1px 1px at 60% 60%, #fff 50%, transparent 51%),
+      radial-gradient(ellipse 140% 40% at 30% 112%, #c9973f 0 55%, transparent 56%),
+      radial-gradient(ellipse 120% 34% at 85% 110%, #e6be6e 0 55%, transparent 56%),
+      linear-gradient(to bottom, #0a0820, #2e1838 70%, #3b1c3e);
+    background-attachment: fixed;
+    min-height: 100vh;
+  }
+  .titlebar {
+    max-width: 860px; margin: 0 auto; padding: 22px 16px 0;
+    display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+  }
+  .brand { display: flex; align-items: center; gap: 12px; }
+  .logo { width: 40px; height: 40px; display: block; flex: none; }
+  .brand h1 {
+    margin: 0; font-size: 32px; font-weight: 900; letter-spacing: 6px; color: transparent;
+    background: repeating-linear-gradient(115deg, #e6be6e 0 3px, #c9973f 3px 5px, #f2d38a 5px 7px);
+    -webkit-background-clip: text; background-clip: text;
+  }
+  .brand .sub { color: var(--muted); font-size: 13px; margin-top: 4px; }
+  .status {
+    display: flex; align-items: center; gap: 8px; font-size: 13px; background: var(--card);
+    border: 1px solid var(--line); border-radius: 999px; padding: 6px 14px;
+  }
+  .dot { width: 9px; height: 9px; border-radius: 50%; background: #6a5a80; }
+  .dot.ok { background: var(--ok); } .dot.warn { background: var(--warn); } .dot.err { background: var(--err); }
+  .wrap { max-width: 860px; margin: 0 auto; padding: 18px 16px 120px; }
+  .card {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 18px;
+    margin-bottom: 16px; box-shadow: 0 10px 30px rgba(0,0,0,.35);
+  }
+  .card h2 { margin: 0 0 12px; font-size: 16px; font-weight: 700; color: var(--ink); display: flex; justify-content: space-between; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+  .card h2 small { color: var(--muted); font-weight: 400; font-size: 13px; }
+  ol.how { margin: 0; padding-left: 20px; color: var(--muted); font-size: 14px; line-height: 1.7; }
+  ol.how b { color: var(--text); }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 12px; margin-bottom: 12px; }
+  .game {
+    position: relative; border: 1px solid var(--line); border-radius: 12px; padding: 12px 10px 10px;
+    display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center; background: rgba(10,8,32,.6);
+  }
+  .game:hover { background: var(--accent-soft); }
+  .game .ico {
+    width: 44px; height: 44px; border-radius: 10px; display: grid; place-items: center;
+    background: repeating-linear-gradient(115deg, #e6be6e 0 2px, #c9973f 2px 4px);
+  }
+  .game .ico svg { width: 26px; }
+  .game .name { font-weight: 600; font-size: 13px; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--ink); }
+  .game .file { color: var(--muted); font-size: 11px; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .game .remove {
+    position: absolute; top: 4px; right: 4px; width: 24px; height: 24px; border-radius: 6px; border: none;
+    background: transparent; color: var(--muted); font-size: 16px; cursor: pointer; opacity: 0;
+  }
+  .game:hover .remove, .game .remove:focus { opacity: 1; }
+  .game .remove:hover { background: var(--err); color: #fff; }
+  .add {
+    border: 2px dashed var(--ink); border-radius: 12px; display: grid; place-items: center; min-height: 112px;
+    color: var(--muted); font-size: 13px; cursor: pointer; text-align: center; padding: 8px;
+  }
+  .add .plus { font-size: 26px; color: var(--ink); line-height: 1; }
+  .add.over, .add:hover { background: var(--accent-soft); color: var(--text); }
+  .meter { height: 8px; background: #241a3e; border-radius: 4px; overflow: hidden; }
+  .meter div { height: 100%; width: 0; background: repeating-linear-gradient(115deg, #e6be6e 0 3px, #c9973f 3px 6px); transition: width .3s; }
+  .note { font-size: 12px; color: var(--muted); margin-top: 8px; }
+  .actions { display: flex; flex-direction: column; gap: 12px; }
+  button.install {
+    align-self: flex-start; display: inline-flex; align-items: center; gap: 10px; border: none; border-radius: 12px;
+    padding: 12px 24px; font: inherit; font-weight: 800; font-size: 15px; color: var(--accent-ink);
+    background: repeating-linear-gradient(115deg, #e6be6e 0 4px, #d9ad5a 4px 8px); cursor: pointer;
+    box-shadow: 0 6px 20px rgba(230,190,110,.25);
+  }
+  button.install:hover:not(:disabled) { filter: brightness(1.08); }
+  button.install:disabled { background: #2a2040; color: #6a5a80; box-shadow: none; cursor: default; }
+  button.install .logo { width: 18px; height: 18px; }
+  ul.steps { list-style: none; margin: 0; padding: 0; font-size: 14px; }
+  ul.steps li { display: flex; align-items: center; gap: 10px; padding: 3px 0; color: var(--muted); }
+  ul.steps li .s { width: 14px; height: 14px; border-radius: 50%; border: 2px solid #6a5a80; flex: none; }
+  ul.steps li.running { color: var(--text); }
+  ul.steps li.running .s { border-color: var(--ink); border-right-color: transparent; animation: spin .8s linear infinite; }
+  ul.steps li.done .s { background: var(--ok); border-color: var(--ok); }
+  ul.steps li.error { color: var(--err); }
+  ul.steps li.error .s { background: var(--err); border-color: var(--err); }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .result { font-size: 14px; padding: 10px 12px; border-radius: 8px; display: none; }
+  .result.ok { display: block; background: rgba(92,214,122,.12); color: #bff5cb; border: 1px solid var(--ok); }
+  .result.error { display: block; background: rgba(255,90,74,.12); color: #ffc8c0; border: 1px solid var(--err); }
+  details summary { cursor: pointer; color: var(--muted); font-size: 13px; }
+  pre { color: var(--text); background: #120c26; border-radius: 8px; padding: 10px; font-size: 11px; max-height: 260px; overflow: auto; white-space: pre-wrap; }
+  a { color: var(--ink); }
+</style>
+</head>
+<body>
+<div class="titlebar">
+  <div class="brand">
+    <svg class="logo" viewBox="0 0 40 40" aria-hidden="true"><rect x="8" y="3" width="24" height="4" rx="2" fill="#7a4a22"/><rect x="8" y="33" width="24" height="4" rx="2" fill="#7a4a22"/><path d="M11 7 L29 7 L21 20 L29 33 L11 33 L19 20 Z" fill="none" stroke="#bfd8f0" stroke-width="1.6"/><path d="M14 11 L26 11 L21 18 L19 18 Z" fill="#e6be6e"/><path d="M20 21 L20 27" stroke="#e6be6e" stroke-width="1.4"/><path d="M13 32 L20 26 L27 32 Z" fill="#e6be6e"/></svg>
+    <div>
+      <h1>SABLE</h1>
+      <div class="sub">Ta calculatrice est faite de sable · NumWorks n0110, n0115 et n0120 · slot B</div>
+    </div>
+  </div>
+  <div class="status"><span class="dot" id="calcDot"></span><span id="calcText">Recherche…</span></div>
+</div>
+
+<div class="wrap">
+  <section class="card">
+    <h2>Avant d'installer</h2>
+    <ol class="how">
+      <li>Branche la calculatrice en USB.</li>
+      <li>Si elle est sur SABLE, NUM TV, GLOUTON, NUMVERSE, Windows-OS, Switch-OS ou PSP-OS, appuie sur <b>Reset</b> au dos : elle revient sur le système officiel (slot A).</li>
+      <li>Quand le voyant en haut à droite passe au vert, clique sur <b>Installer</b>.</li>
+    </ol>
+  </section>
+
+  <section class="card">
+    <h2>Jeux <small id="gamesInfo"></small></h2>
+    <div class="grid" id="games"></div>
+    <input type="file" id="picker" accept=".nwa" multiple hidden>
+    <div class="meter" title="Place utilisée dans le slot B"><div id="meter"></div></div>
+    <div class="note" id="gamesNote">Chaque jeu devient une statue de sable (page des jeux).</div>
+  </section>
+
+  <section class="card actions">
+    <button class="install" id="install" disabled><span aria-hidden="true">✏️</span>Installer SABLE</button>
+    <ul class="steps" id="steps"></ul>
+    <div class="result" id="result"></div>
+    <details id="logBox" hidden>
+      <summary>Journal détaillé</summary>
+      <pre id="log"></pre>
+    </details>
+  </section>
+</div>
+
+<script>
+const MODELS_OK_ALL = ["n0110", "n0115", "n0120"];
+let MODELS_OK = MODELS_OK_ALL;
+const $ = (id) => document.getElementById(id);
+const SECTOR = 0x10000;
+let state = { calculator: { connected: null }, games: [], appsCapacity: 0, firmware: true };
+let installing = false;
+
+const gameIcon = '<svg viewBox="0 0 100 100" aria-hidden="true"><rect x="8" y="30" width="84" height="44" rx="20" fill="#fff"/><path d="M28 44v16M20 52h16" stroke="#4a5db5" stroke-width="7" stroke-linecap="round"/><circle cx="64" cy="47" r="5" fill="#4a5db5"/><circle cx="75" cy="58" r="5" fill="#4a5db5"/></svg>';
+
+function escapeHtml(s) {
+  return s.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+}
+
+function renderCalc() {
+  const c = state.calculator;
+  const dot = $("calcDot"), text = $("calcText");
+  dot.className = "dot";
+  if (installing || c.connected === null) { text.textContent = installing ? "Installation…" : "Recherche…"; return; }
+  if (!c.connected) { dot.classList.add("err"); text.textContent = "Calculatrice non détectée"; }
+  else if (!MODELS_OK.includes(c.model)) { dot.classList.add("err"); text.textContent = `Modèle ${c.model} non supporté`; }
+  else if (c.inactiveSlot !== "B") { dot.classList.add("warn"); text.textContent = "Sur le slot B : appuie sur Reset"; }
+  else { dot.classList.add("ok"); text.textContent = `${c.model} prête`; }
+}
+
+function canInstall() {
+  const c = state.calculator;
+  return !installing && state.firmware && c.connected && MODELS_OK.includes(c.model) && c.inactiveSlot === "B";
+}
+
+function renderGames() {
+  const grid = $("games");
+  grid.innerHTML = "";
+  let used = SECTOR;
+  for (const g of state.games) {
+    used += Math.ceil(g.size / SECTOR) * SECTOR;
+    const tile = document.createElement("div");
+    tile.className = "game";
+    tile.innerHTML = `<div class="ico">${gameIcon}</div><div class="name" title="${escapeHtml(g.name)}">${escapeHtml(g.name)}</div><div class="file">${escapeHtml(g.file)} · ${(g.size / 1024).toFixed(0)} Ko</div>`;
+    const del = document.createElement("button");
+    del.className = "remove";
+    del.title = "Retirer";
+    del.setAttribute("aria-label", `Retirer ${g.name}`);
+    del.textContent = "×";
+    del.disabled = installing;
+    del.onclick = async () => {
+      await fetch("/api/games/" + encodeURIComponent(g.file), { method: "DELETE" });
+      refresh();
+    };
+    tile.appendChild(del);
+    grid.appendChild(tile);
+  }
+  const add = document.createElement("label");
+  add.className = "add";
+  add.htmlFor = "picker";
+  add.innerHTML = '<div><div class="plus">+</div>Glisse des .nwa ici<br>ou clique</div>';
+  add.addEventListener("dragover", (e) => { e.preventDefault(); add.classList.add("over"); });
+  add.addEventListener("dragleave", () => add.classList.remove("over"));
+  add.addEventListener("drop", (e) => { e.preventDefault(); e.stopPropagation(); add.classList.remove("over"); upload(e.dataTransfer.files); });
+  grid.appendChild(add);
+  const cap = state.appsCapacity || 1;
+  $("meter").style.width = Math.min(100, (used / cap) * 100) + "%";
+  $("gamesInfo").textContent = `${state.games.length} jeu${state.games.length > 1 ? "x" : ""} · ~${Math.round(used / 1024)} Ko / ${Math.round(cap / 1024)} Ko`;
+  if (state.platform === "windows") {
+    $("gamesNote").textContent = "Chaque jeu devient une statue de sable (page des jeux). Sur Windows, ajouter un nouveau jeu demande la chaîne ARM (Arm GNU Toolchain).";
+  }
+}
+
+function render() {
+  renderCalc();
+  renderGames();
+  $("install").disabled = !canInstall();
+}
+
+async function refresh() {
+  if (installing) return;
+  try {
+    const r = await fetch("/api/status");
+    state = await r.json();
+    if (state && Array.isArray(state.models)) MODELS_OK = state.models;
+  } catch { state.calculator = { connected: false }; }
+  render();
+}
+
+async function upload(files) {
+  for (const f of files) {
+    if (!f.name.toLowerCase().endsWith(".nwa")) { alert(`${f.name} n'est pas un .nwa`); continue; }
+    const r = await fetch("/api/games", { method: "POST", headers: { "X-Filename": encodeURIComponent(f.name) }, body: f });
+    if (!r.ok) { const e = await r.json().catch(() => ({})); alert(`${f.name} : ${e.error || "refusé"}`); }
+  }
+  refresh();
+}
+
+$("picker").addEventListener("change", (e) => { upload(e.target.files); e.target.value = ""; });
+document.addEventListener("dragover", (e) => e.preventDefault());
+document.addEventListener("drop", (e) => { e.preventDefault(); if (e.dataTransfer.files.length) upload(e.dataTransfer.files); });
+
+function renderJob(job) {
+  const steps = $("steps");
+  steps.innerHTML = "";
+  for (const s of job.steps) {
+    const li = document.createElement("li");
+    li.className = s.state;
+    li.innerHTML = `<span class="s"></span><span>${escapeHtml(s.label)}</span>`;
+    steps.appendChild(li);
+  }
+  $("logBox").hidden = !job.log;
+  $("log").textContent = job.log;
+  const res = $("result");
+  res.className = "result";
+  if (job.result === "ok") {
+    res.classList.add("ok");
+    res.textContent = "SABLE est installé et démarre sur ta calculatrice. Passe l'écran « logiciel non officiel » avec une touche : le désert apparaît.";
+  } else if (job.result === "error") {
+    res.classList.add("error");
+    const last = job.log.split("\n").filter((l) => l.startsWith("ERREUR")).pop() || "Erreur.";
+    res.textContent = last.replace("ERREUR: ", "");
+  }
+}
+
+$("install").onclick = async () => {
+  const r = await fetch("/api/install", { method: "POST" });
+  if (!r.ok) return;
+  installing = true;
+  render();
+  const poll = setInterval(async () => {
+    const job = await (await fetch("/api/job")).json();
+    renderJob(job);
+    if (!job.running) {
+      clearInterval(poll);
+      installing = false;
+      setTimeout(refresh, 1500);
+    }
+  }, 500);
+};
+
+refresh();
+setInterval(refresh, 3000);
+</script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+SABLE : installateur pour NumWorks n0110, n0115 et n0120 (Mac)
+==================================================
+
+1. Une seule fois, dans le Terminal (avec Homebrew, https://brew.sh) :
+
+       brew install libusb dfu-util
+
+   Les jeux déjà dans le dossier games/ sont prêts à installer.
+   Pour en ajouter d'autres (.nwa), il faut aussi :
+
+       brew install --cask gcc-arm-embedded
+
+2. Double-clique sur « Installer SABLE.command ».
+   (La première fois, macOS peut le bloquer : clic droit > Ouvrir > Ouvrir.)
+   La page de l'installateur s'ouvre dans ton navigateur.
+
+3. Branche la calculatrice en USB et appuie sur Reset au dos :
+   elle redémarre sur le système officiel (slot A).
+
+4. Quand le voyant passe au vert, glisse tes jeux .nwa dans la page
+   si tu veux, puis clique sur « Installer SABLE ».
+
+SABLE s'installe dans le slot B : le système officiel (slot A) n'est
+jamais modifié. Après un Reset, la calculatrice revient sur le système
+officiel ; il suffit de relancer l'installation pour retrouver SABLE.
+
+Les commandes de SABLE
+----------------------
+
+Flèches ................ choisir une statue ; au bord, la page change
+                         (les statues s'envolent, les nouvelles se forment)
+1 à 9 .................. aller directement à la page 1, 2, 3...
+OK ..................... ouvrir l'appli : sa statue part en poussière
+Effacer ................ BOUTON PANIQUE : tout s'effondre, Calculs s'ouvre
+Var .................... MODE DIEU : verse ce que tu veux (OK maintenu)
+Boîte à outils ......... le Labo (voir plus bas)
+Retour ................. revenir à la première page
++ / - .................. la luminosité (la lune)
+
+Les catastrophes (les touches de fonctions)
+-------------------------------------------
+
+sin pluie · cos tempête de sable · tan tsunami · x^2 foudre · ln volcan
+log virus (le feu le soigne) · e^x explosion · π pluie de décimales en or
+√ une racine géante pousse · ^ météorite · ×10^x pluie d'or
+i monde imaginaire · x,n,t séisme · Ans claquement de doigts (la moitié
+de la matière disparaît) · ( et ) tourner la calculatrice (la gravité
+change) · 0 vider le désert
+
+Quand tu reviens d'une appli
+----------------------------
+
+Le dernier écran de l'appli (ou du jeu) s'effrite en grains de sable qui
+tombent dans le désert. Et tes résultats de Calculs tombent du ciel, faits
+d'une matière qui dépend du nombre : 42 en or, 666 en lave, 0 ouvre un
+trou noir, 404 s'évapore, un nombre premier est en pierre, un nombre à
+virgule coule comme de l'eau, un négatif gèle, un nombre énorme est une
+météorite...
+
+Le Labo (Boîte à outils)
+------------------------
+
+Sablier du cours ....... le temps avant la sonnerie, dans un vrai sablier
+                         (il continue pendant que tu travailles)
+Calculatrice menteuse .. FARCE : prête-la à ton voisin. Elle a l'air normale.
+                         Elle ment de plus en plus. Retour 3 fois : la blague
+Faux appel ............. Mamie, le Directeur, Pythagore, ta calculatrice...
+                         t'appellent. Sur ta calculatrice.
+Désintégrateur ......... écris un mot (LUNDI, LES MATHS...) : poussière.
+Bataille de sable ...... 2 joueurs, des châteaux, des catapultes, de la lave
+Les catastrophes ....... la liste des touches
+Réglages ............... LED, remettre le désert à neuf, statistiques

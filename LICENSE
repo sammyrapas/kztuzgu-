@@ -1,0 +1,22 @@
+SABLE is licensed under the Creative Commons Attribution-NonCommercial-
+ShareAlike 4.0 International License (CC BY-NC-SA 4.0).
+
+You may copy, redistribute, remix, transform and build upon this material for
+non-commercial purposes, provided that you give appropriate credit, indicate if
+changes were made, and distribute your contributions under the same license.
+
+Full legal text: https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode
+Summary:         https://creativecommons.org/licenses/by-nc-sa/4.0/
+
+This repository does not contain NumWorks Epsilon. The patch (patches/sable-epsilon.patch)
+applies to NumWorks' own source code, which each user downloads from
+https://github.com/numworks/epsilon. Epsilon is copyright NumWorks, all rights
+reserved, and is not covered by this license. NumWorks is a registered
+trademark of NumWorks.
+
+SABLE is an unofficial fan project, not affiliated with or endorsed by
+NumWorks. The desert, the sand simulation, the statues, the disasters, the
+tools of the Labo and every text of SABLE are original work made for this
+project: everything on screen is computed by code (apps/home/sable/ in the
+patch). The statues are made from the icons of the apps installed on the
+calculator itself; no image, sound or logo is taken from anywhere else.
